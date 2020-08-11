@@ -1,12 +1,13 @@
 import { Controller, Get, Post, Put, Delete } from '@nestjs/common';
 import { StudentsService } from './students.service';
+import { StudentsDTO } from './students.dto';
 
 @Controller('students')
 export class StudentsController {
   constructor(private studentsService: StudentsService) {}
 
   @Get()
-  public async getAllStudents() {
+  public async getAllStudents(): Promise<StudentsDTO[]> {
     return await this.studentsService.getAllStudents();
   }
 
