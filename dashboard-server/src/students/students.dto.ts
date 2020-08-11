@@ -26,4 +26,14 @@ export class StudentsDTO implements Readonly<StudentsDTO> {
       weekend: student.weekend,
     });
   }
+
+  public toEntity() {
+    const student = new Students();
+    student.id = this.id;
+    student.firstName = this.firstName;
+    student.lastName = this.lastName;
+    student.github = this.github;
+    student.weekend = this.weekend;
+    return student;
+  }
 }

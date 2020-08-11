@@ -1,6 +1,15 @@
-import { Controller, Get, Post, Put, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Put,
+  Delete,
+  Body,
+  Param,
+} from '@nestjs/common';
 import { StudentsService } from './students.service';
 import { StudentsDTO } from './students.dto';
+import { plainToClass } from 'class-transformer';
 
 @Controller('students')
 export class StudentsController {
@@ -12,23 +21,28 @@ export class StudentsController {
   }
 
   @Get(':id')
-  public getStudent() {
-    return {};
+  public async getStudent(@Param('id') id: string): Promise<StudentsDTO> {
+    return await this.studentsService.getStudent(id);
   }
 
   @Post()
-  public addStudent() {
-    return {};
+  public async addStudent(@Body() dto: StudentsDTO): Promise<StudentsDTO> {
+    const studentDto = plainToClass(StudentsDTO, dto);
+    return await this.studentsService.create(studentDto);
   }
 
   @Put(':id')
-  public updateStudent() {
-    return {};
+  public async updateStudent(
+    @Param('id') id: string,
+    @Body() dto: StudentsDTO,
+  ): Promise<StudentsDTO> {
+    const studentDto = plainToClass(StudentsDTO, dto);
+    return await this.studentsService.update(id, studentDto);
   }
 
   @Delete(':id')
-  public deleteStudent() {
-    return {};
+  public deleteStudent(@Param('id') id: string): Promise<number> {
+    return this.studentsService.delete(id);
   }
 
   @Post(':id/attendance')
