@@ -45,6 +45,6 @@ export class TeamleadService {
   }
 
   public async deleteTeamLead(id: string) {
-      return await this.teamLeadRepository.delete({id})
+    return await this.teamLeadRepository.delete({ id });
   }
 }
