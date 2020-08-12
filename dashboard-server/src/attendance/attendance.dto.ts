@@ -10,7 +10,6 @@ export class AttendanceDTO implements Readonly<AttendanceDTO> {
   public static from(dto: Partial<AttendanceDTO>) {
     const newAttendanceDto = new AttendanceDTO();
     newAttendanceDto.id = dto.id;
-    newAttendanceDto.student = dto.student;
     newAttendanceDto.reason = dto.reason;
     newAttendanceDto.dateMissed = dto.dateMissed;
     return newAttendanceDto;
@@ -19,7 +18,6 @@ export class AttendanceDTO implements Readonly<AttendanceDTO> {
   public static fromEntity(entity: Attendance) {
     return this.from({
       id: entity.id,
-      student: entity.student,
       reason: entity.reason,
       dateMissed: entity.dateMissed,
     });

@@ -13,7 +13,7 @@ export class StudentsService {
 
   public async getAllStudents(): Promise<StudentsDTO[]> {
     return await this.studentRepository
-      .find({ relations: ['attendance'] })
+      .find({ relations: ['attendance', 'notes'] })
       .then(students =>
         students.map(student => StudentsDTO.fromEntity(student)),
       );

@@ -1,5 +1,6 @@
 import { Students } from './entities/students.entity';
 import { Attendance } from 'src/attendance/entities/attendance.entity';
+import { Notes } from 'src/notes/entities/notes.entity';
 
 export class StudentsDTO implements Readonly<StudentsDTO> {
   id: string;
@@ -8,6 +9,7 @@ export class StudentsDTO implements Readonly<StudentsDTO> {
   weekend: string;
   github: string;
   attendance: Attendance[];
+  notes: Notes[];
 
   public static from(dto: Partial<StudentsDTO>) {
     const student = new StudentsDTO();
@@ -17,6 +19,7 @@ export class StudentsDTO implements Readonly<StudentsDTO> {
     student.github = dto.github;
     student.weekend = dto.weekend;
     student.attendance = dto.attendance;
+    student.notes = dto.notes;
     return student;
   }
 
@@ -28,6 +31,7 @@ export class StudentsDTO implements Readonly<StudentsDTO> {
       github: student.github,
       weekend: student.weekend,
       attendance: student.attendance,
+      notes: student.notes,
     });
   }
 
