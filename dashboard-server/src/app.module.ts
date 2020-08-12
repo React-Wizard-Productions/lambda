@@ -6,6 +6,7 @@ import { configService } from './config/configService';
 import { StudentsModule } from './students/students.module';
 import { AttendanceModule } from './attendance/attendance.module';
 import { NotesModule } from './notes/notes.module';
+import { TeamleadModule } from './teamlead/teamlead.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { NotesModule } from './notes/notes.module';
     StudentsModule,
     AttendanceModule,
     NotesModule,
+    TeamleadModule,
   ],
   controllers: [AppController],
   providers: [AppService],
