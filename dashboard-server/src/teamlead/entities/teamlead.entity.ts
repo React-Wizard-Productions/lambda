@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany } from 'typeorm';
+import { Group } from 'src/group/entities/group.entity';
 
 @Entity({ name: 'teamleads' })
 export class TeamLead {
@@ -16,4 +17,7 @@ export class TeamLead {
 
   @Column({ nullable: true })
   weekend: string;
+
+  @ManyToMany(type => Group, groups => groups.teamLeads)
+  groups: Group[]
 }
