@@ -13,7 +13,7 @@ export class StudentsService {
 
   public async getAllStudents(): Promise<StudentsDTO[]> {
     return await this.studentRepository
-      .find({relations: ['attendance']})
+      .find({ relations: ['attendance'] })
       .then(students =>
         students.map(student => StudentsDTO.fromEntity(student)),
       );
@@ -45,6 +45,8 @@ export class StudentsService {
   }
 
   public async delete(id: string): Promise<number> {
-    return this.studentRepository.delete({id}).then(res => res.affected);
+    return await this.studentRepository
+      .delete({ id })
+      .then(res => res.affected);
   }
 }

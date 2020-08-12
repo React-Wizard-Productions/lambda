@@ -18,6 +18,9 @@ export class Students {
   @Column({ nullable: true })
   weekend: string;
 
-  @OneToMany(type => Attendance, attendance => attendance.student)
-  attendance: Attendance[]
+  @OneToMany(
+    type => Attendance,
+    attendance => attendance.student,
+  )
+  attendance: Attendance[];
 }

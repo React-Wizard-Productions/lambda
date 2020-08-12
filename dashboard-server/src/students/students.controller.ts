@@ -10,10 +10,16 @@ import {
 import { StudentsService } from './students.service';
 import { StudentsDTO } from './students.dto';
 import { plainToClass } from 'class-transformer';
+import { AttendanceDTO } from 'src/attendance/attendance.dto';
+import { AttendanceService } from 'src/attendance/attendance.service';
+import { Attendance } from 'src/attendance/entities/attendance.entity';
 
 @Controller('students')
 export class StudentsController {
-  constructor(private studentsService: StudentsService) {}
+  constructor(
+    private studentsService: StudentsService,
+    private attendanceService: AttendanceService,
+  ) {}
 
   @Get()
   public async getAllStudents(): Promise<StudentsDTO[]> {
@@ -46,8 +52,12 @@ export class StudentsController {
   }
 
   @Post(':id/attendance')
-  public addAttendanceRecord() {
-    return {};
+  public addAttendanceRecord(
+    @Param('id') id: string,
+    @Body() dto: AttendanceDTO,
+  ): Promise<AttendanceDTO> {
+    const attendanceDto = plainToClass(AttendanceDTO, dto);
+    return this.attendanceService.addAttendance(id, attendanceDto);
   }
 
   @Post(':id/notes')
