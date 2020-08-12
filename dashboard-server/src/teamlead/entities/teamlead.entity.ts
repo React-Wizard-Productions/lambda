@@ -17,7 +17,4 @@ export class TeamLead {
 
   @Column({ nullable: true })
   weekend: string;
-
-  @ManyToMany(type => Group, groups => groups.teamLeads)
-  groups: Group[]
 }

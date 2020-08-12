@@ -1,4 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany} from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToMany,
+  ManyToMany,
+} from 'typeorm';
 import { Attendance } from 'src/attendance/entities/attendance.entity';
 import { Notes } from 'src/notes/entities/notes.entity';
 import { Group } from 'src/group/entities/group.entity';
@@ -31,7 +37,4 @@ export class Students {
     notes => notes.student,
   )
   notes: Notes[];
-
-  @ManyToMany(type => Group, group => group.students)
-  groups: Group[]
 }
