@@ -22,4 +22,12 @@ export class NotesService {
       .save(newDto)
       .then(entity => NotesDTO.fromEntity(entity));
   }
+
+  public async updateNote(id: string, dto: NotesDTO): Promise<NotesDTO> {
+    const note = await this.notesRepository.findOneOrFail({ id });
+    const noteDto = { ...note, ...dto };
+    return await this.notesRepository
+      .save(noteDto)
+      .then(e => NotesDTO.fromEntity(e));
+  }
 }
