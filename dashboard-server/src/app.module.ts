@@ -16,7 +16,7 @@ import { GroupModule } from './group/group.module';
     AttendanceModule,
     NotesModule,
     TeamleadModule,
-    GroupModule,
+    GroupModule
   ],
   controllers: [AppController],
   providers: [AppService],

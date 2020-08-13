@@ -29,6 +29,10 @@ class ConfigService {
     return this.getValue('NODE_ENV', false) === 'production';
   }
 
+  public isDocker() {
+    return this.getValue('MODE', false) === 'docker'
+  }
+
   public getTypeOrmConfig(): TypeOrmModuleOptions {
     return {
       type: 'postgres',
@@ -37,7 +41,7 @@ class ConfigService {
       username: this.getValue('DB_USER'),
       password: this.getValue('DB_PASS'),
       database: this.getValue('DB_NAME'),
-      entities: ['dist/**/*.entity.js'],
+      entities: [`${this.isDocker ? 'dist' : ''}/**/*.entity.js`],
       migrationsTableName: 'migrations',
       migrations: [`dist/migration/*.js`],
       cli: {

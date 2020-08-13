@@ -1,6 +1,17 @@
 version: "3"
 
 services:
+    api:
+        container_name: dashboard-api
+        build: ./dashboard-server
+        ports:
+            - "3333:3333"
+        env_file: 
+            - ./dashboard-server/.env-docker
+        depends_on: 
+            - postgres
+        networks:
+            - database
     postgres:
         container_name: dashboard-postgres
         image: postgres
