@@ -12,6 +12,17 @@ services:
             - postgres
         networks:
             - database
+
+    client:
+        container_name: dashboard-client
+        build: ./dashboard-client
+        ports:
+            - "80:80"
+        env_file:
+          - ./dashboard-client/.env
+        networks:
+            - database
+
     postgres:
         container_name: dashboard-postgres
         image: postgres
