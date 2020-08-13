@@ -1,11 +1,14 @@
 import React, {PropsWithChildren} from 'react';
 import ThemeProvider from "./theme/themeprovider.component";
+import ReduxProvider from "./redux/reduxprovider.component";
 
 export const Provider = ({children}: PropsWithChildren<any>) => {
     return (
-        <ThemeProvider>
-            {children}
-        </ThemeProvider>
+        <ReduxProvider>
+            <ThemeProvider>
+                {children}
+            </ThemeProvider>
+        </ReduxProvider>
     )
 }
 
