@@ -1,9 +1,8 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, Entity } from 'typeorm';
+import { Repository } from 'typeorm';
 import { Students } from './entities/students.entity';
 import { StudentsDTO } from './students.dto';
-import { throws } from 'assert';
 
 @Injectable()
 export class StudentsService {
