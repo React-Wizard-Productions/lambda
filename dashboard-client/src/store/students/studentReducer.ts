@@ -21,6 +21,18 @@ const studentReducer: Reducer<StudentState, StudentActions> = (state = initialSt
             return {...state, isLoading: false, students: [...state.students, action.payload]}
         case StudentTypes.ADD_STUDENTS_FAILURE:
             return {...state, isLoading: false, errors: action.payload}
+        case StudentTypes.UPDATE_STUDENTS_START:
+            return {...state, isLoading: true}
+        case StudentTypes.UPDATE_STUDENTS_SUCCESS:
+            return {...state, isLoading: false, students: state.students.map(student => {
+                if (student.id === action.payload.id) {
+                    return action.payload
+                } else {
+                    return student;
+                }
+                })}
+        case StudentTypes.UPDATE_STUDENTS_FAILURE:
+            return {...state, isLoading: false, errors: action.payload}
         default:
             return state;
     }

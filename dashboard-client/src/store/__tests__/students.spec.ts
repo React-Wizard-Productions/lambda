@@ -1,7 +1,7 @@
 import {Student, StudentState} from "../students/studentTypes";
 import {applyMiddleware, createStore} from "redux";
 import studentReducer from "../students/studentReducer";
-import {loadStudents, addStudent} from "../students/studentActions";
+import {loadStudents, addStudent, updateStudent} from "../students/studentActions";
 import thunk from 'redux-thunk';
 
 describe('Students', () => {
@@ -50,6 +50,40 @@ describe('Students', () => {
             await store.dispatch(addStudent(student));
 
             expect(store.getState().students.length).toBe(1)
+        })
+        it('updates a student with the given id', async () => {
+            const students: Student[] = [{
+                firstName: 'Test',
+                lastName: 'User',
+                github: 'agithubuser',
+                weekend: '',
+                id: 'myId'
+            }]
+            const updateData: Partial<Student> = {
+                firstName: 'Don'
+            }
+            const returnStudent: Student = {
+                firstName: 'Don',
+                lastName: 'User',
+                github: 'agithubuser',
+                weekend: '',
+                id: 'myId'
+            }
+            const initialState: StudentState = {
+                students,
+                isLoading: false,
+                errors: null
+            }
+            const api = {
+                updateStudent: (id: string, update: Partial<Student>) => Promise.resolve(returnStudent)
+            }
+
+            const store = createStore(studentReducer, initialState, applyMiddleware(thunk.withExtraArgument(api)));
+
+            await store.dispatch(updateStudent(students[0].id, updateData));
+
+            expect(store.getState().students.length).toBe(1)
+            expect(store.getState().students[0].firstName).toEqual('Don')
         })
     })
 })

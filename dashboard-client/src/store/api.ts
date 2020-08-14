@@ -11,6 +11,9 @@ const api = {
    },
     addStudent(student: Partial<Student>) {
        return client.post('/students', student).then(res => res.data)
+    },
+    updateStudent(id: string, updateData: Partial<Student>) {
+       return client.put(`/students/${id}`, updateData).then(res => res.data)
     }
 }
 
