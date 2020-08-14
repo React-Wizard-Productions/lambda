@@ -21,7 +21,7 @@ export class StudentsService {
 
   public async getStudent(id: string): Promise<StudentsDTO> {
     return await this.studentRepository
-      .findOne({ id })
+      .findOne({ id }, {relations: ['attendance', 'notes']})
       .then(student => StudentsDTO.fromEntity(student))
       .catch(() => {
         throw new HttpException(
@@ -34,7 +34,7 @@ export class StudentsService {
   public async create(dto: StudentsDTO): Promise<StudentsDTO> {
     return this.studentRepository
       .save(dto.toEntity())
-      .then(student => StudentsDTO.fromEntity(student));
+      .then(student => this.getStudent(student.id));
   }
 
   public async update(id: string, dto: StudentsDTO): Promise<StudentsDTO> {

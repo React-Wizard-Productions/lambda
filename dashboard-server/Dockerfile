@@ -9,11 +9,10 @@ RUN npm run build
 
 FROM node:12-alpine
 WORKDIR /app
-COPY --from=builder /app/dist /app/dist
+COPY --from=builder /app /app
 COPY package.json /app/package.json
 RUN apk --no-cache add --virtual build-deps build-base python
 RUN npm install --only=prod
 
 EXPOSE 3333
-USER node
 CMD ["npm", "run", "start:prod"]

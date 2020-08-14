@@ -15,6 +15,12 @@ const studentReducer: Reducer<StudentState, StudentActions> = (state = initialSt
             return {...state, isLoading: false, students: action.payload}
         case StudentTypes.FETCH_STUDENTS_FAILURE:
             return {...state, isLoading: false, errors: action.payload}
+        case StudentTypes.ADD_STUDENTS_START:
+            return {...state, isLoading: true}
+        case StudentTypes.ADD_STUDENTS_SUCCESS:
+            return {...state, isLoading: false, students: [...state.students, action.payload]}
+        case StudentTypes.ADD_STUDENTS_FAILURE:
+            return {...state, isLoading: false, errors: action.payload}
         default:
             return state;
     }
