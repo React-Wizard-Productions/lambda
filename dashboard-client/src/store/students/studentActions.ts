@@ -16,6 +16,11 @@ export const updateStudent = (id: string, updateData: Partial<Student>) => (disp
     api.updateStudent(id, updateData).then(student => dispatch(updateSuccessAction(student))).catch(err => dispatch(updateErrorAction(err)))
 }
 
+export const deleteStudent = (id: string) => (dispatch: (arg0: StudentActions) => void, getState: any, api: { deleteStudent: (arg0: string) => Promise<any>; }) => {
+    dispatch(deleteStartAction())
+    api.deleteStudent(id).then(() => dispatch(deleteSuccessAction(id))).catch(err => deleteErrorAction(err));
+}
+
 const fetchStartAction = (): StudentActions => createNoPayloadAction(StudentTypes.FETCH_STUDENTS_START)
 const fetchSuccessAction = (students: Student[]): StudentActions => createAction(StudentTypes.FETCH_STUDENTS_SUCCESS, students)
 const fetchErrorAction = (error: Error): StudentActions => createAction(StudentTypes.FETCH_STUDENTS_FAILURE, error)
@@ -27,3 +32,7 @@ const addErrorAction = (error: Error): StudentActions => createAction(StudentTyp
 const updateStartAction = (): StudentActions => createNoPayloadAction(StudentTypes.UPDATE_STUDENTS_START)
 const updateSuccessAction = (student: Student): StudentActions => createAction(StudentTypes.UPDATE_STUDENTS_SUCCESS, student)
 const updateErrorAction = (error: Error): StudentActions => createAction(StudentTypes.UPDATE_STUDENTS_FAILURE, error)
+
+const deleteStartAction = (): StudentActions => createNoPayloadAction(StudentTypes.DELETE_STUDENTS_START)
+const deleteSuccessAction = (id: string): StudentActions => createAction(StudentTypes.DELETE_STUDENTS_SUCCESS, id)
+const deleteErrorAction = (error: Error): StudentActions => createAction(StudentTypes.DELETE_STUDENTS_FAILURE, error)

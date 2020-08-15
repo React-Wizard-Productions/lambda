@@ -1,11 +1,11 @@
 import {Student, StudentState} from "../students/studentTypes";
 import {applyMiddleware, createStore} from "redux";
 import studentReducer from "../students/studentReducer";
-import {loadStudents, addStudent, updateStudent} from "../students/studentActions";
+import {loadStudents, addStudent, updateStudent, deleteStudent} from "../students/studentActions";
 import thunk from 'redux-thunk';
 
 describe('Students', () => {
-    describe('Load Students Action', () => {
+    describe('Actions', () => {
         it('stores the students', async () => {
             const students: Student[] = []
             const api = {
@@ -84,6 +84,28 @@ describe('Students', () => {
 
             expect(store.getState().students.length).toBe(1)
             expect(store.getState().students[0].firstName).toEqual('Don')
+        })
+        it('should remove the student with the given id', async () => {
+            const students: Student[] = [{
+                firstName: 'Test',
+                lastName: 'User',
+                github: 'agithubuser',
+                weekend: '',
+                id: 'myId'
+            }]
+
+            const initialState: StudentState = {
+                students,
+                isLoading: false,
+                errors: null
+            }
+            const api = {
+                deleteStudent: (id: string) => Promise.resolve(null)
+            }
+            const store = createStore(studentReducer, initialState, applyMiddleware(thunk.withExtraArgument(api)));
+            await store.dispatch(deleteStudent(students[0].id))
+
+            expect(store.getState().students.length).toBe(0)
         })
     })
 })

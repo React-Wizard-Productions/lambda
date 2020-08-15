@@ -14,6 +14,9 @@ const api = {
     },
     updateStudent(id: string, updateData: Partial<Student>) {
        return client.put(`/students/${id}`, updateData).then(res => res.data)
+    },
+    deleteStudent(id: string) {
+       return client.delete(`/students/${id}`).then(res => res.data)
     }
 }
 

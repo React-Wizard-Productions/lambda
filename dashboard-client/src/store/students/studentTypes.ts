@@ -10,6 +10,9 @@ export enum StudentTypes {
     UPDATE_STUDENTS_START = "UPDATE_STUDENTS_START",
     UPDATE_STUDENTS_SUCCESS = "UPDATE_STUDENTS_SUCCESS",
     UPDATE_STUDENTS_FAILURE = "UPDATE_STUDENTS_FAILURE",
+    DELETE_STUDENTS_START = "DELETE_STUDENTS_START",
+    DELETE_STUDENTS_SUCCESS = "DELETE_STUDENTS_SUCCESS",
+    DELETE_STUDENTS_FAILURE = "DELETE_STUDENTS_FAILURE",
 }
 
 export interface Student {
@@ -38,6 +41,10 @@ type UpdateStudentsStartAction = NoPayloadAction<typeof StudentTypes.UPDATE_STUD
 type UpdateStudentsSuccessAction = Action<typeof StudentTypes.UPDATE_STUDENTS_SUCCESS, Student>
 type UpdateStudentsErrorAction = Action<typeof StudentTypes.UPDATE_STUDENTS_FAILURE, Error>
 
+type DeleteStudentsStartAction = NoPayloadAction<typeof StudentTypes.DELETE_STUDENTS_START>
+type DeleteStudentsSuccessAction = Action<typeof StudentTypes.DELETE_STUDENTS_SUCCESS, string>
+type DeleteStudentsErrorAction = Action<typeof StudentTypes.DELETE_STUDENTS_FAILURE, Error>
+
 
 export type StudentActions =
     FetchStudentsErrorAction
@@ -49,3 +56,6 @@ export type StudentActions =
     | UpdateStudentsErrorAction
     | UpdateStudentsStartAction
     | UpdateStudentsSuccessAction
+    | DeleteStudentsErrorAction
+    | DeleteStudentsStartAction
+    | DeleteStudentsSuccessAction

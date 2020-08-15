@@ -33,6 +33,12 @@ const studentReducer: Reducer<StudentState, StudentActions> = (state = initialSt
                 })}
         case StudentTypes.UPDATE_STUDENTS_FAILURE:
             return {...state, isLoading: false, errors: action.payload}
+        case StudentTypes.DELETE_STUDENTS_START:
+            return {...state, isLoading: true}
+        case StudentTypes.DELETE_STUDENTS_SUCCESS:
+            return {...state, isLoading: false, students: state.students.filter(student => student.id !== action.payload)}
+        case StudentTypes.DELETE_STUDENTS_FAILURE:
+            return {...state, isLoading: false, errors: action.payload}
         default:
             return state;
     }
